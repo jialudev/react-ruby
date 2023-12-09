@@ -136,21 +136,27 @@ export default function Page() {
   const [tableData, setTableData] = useState([]);
   const [lineData, setLineData] = useState([]);
 
-  const [socketData, setSocketData] = useState([[], []]);
+  const [socketData, setSocketData] = useState([[10], []]);
 
   useEffect(() => {
     const channel = cable.subscriptions.create("CableChannel", {
       connected() {
         console.log("Connected to ActionCable channel");
-        this.perform("receive", { data: socketData });
+        // setTimeout(() => {
+        //   this.perform("receive", { data: socketData });
+        //   console.log("发送 receive", socketData);
+        // }, 1000);
       },
       disconnected() {
         console.log("Disconnected from ActionCable channel");
       },
-      received(data) {
-        console.log("Received data from ActionCable:", data);
-        setSocketData((res) => {
-          res[0].push(10);
+      received(res) {
+        console.log("Received data from ActionCable:", res);
+        const { data } = res;
+        setSocketData((list) => {
+          list[0] = [...data];
+          list[1] = JSON.parse(JSON.stringify(data.reverse()));
+          return JSON.parse(JSON.stringify(list));
         });
         // setMessage(data.message);
       },
@@ -159,20 +165,19 @@ export default function Page() {
     return () => {
       channel.unsubscribe();
     };
-  }, [setSocketData, socketData]); // 仅在组件挂载时运行
+  }, [setSocketData]); // 仅在组件挂载时运行
 
   useEffect(() => {
     if (tableData.length) {
       return;
     }
-    setSocketData([]);
     Fetch({ url: data_url }).then(({ result }) => {
       const { tableData, lineData } = result;
       setTableData(tableData);
       setLineData(lineData);
     });
   }, [tableData]);
-
+  console.log(socketData, "socketData");
   return (
     <div className="wrap">
       <MemoizedPageRight tableData={tableData} />
@@ -184,7 +189,11 @@ export default function Page() {
           <ReactEcharts className="my_flowecharts" option={option_flow} />
         </div>
         <div className="echarts_wrap echarts_wrap_middle">
-          <ReactEcharts className="my-charts" option={option_day(socketData)} />
+          <ReactEcharts
+            key={socketData[0].length}
+            className="my-charts"
+            option={option_day(socketData)}
+          />
         </div>
         <div className="echarts_wrap echarts_wrap_bottom">
           <div className="nav"></div>
