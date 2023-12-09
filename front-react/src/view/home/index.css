@@ -1,0 +1,420 @@
+html {
+    width: 100%;
+    height: 160%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    /* background-color: chartreuse; */
+}
+
+.wrap {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    /* background-color: chartreuse; */
+    background-image: url("../../assets/backgroundHomepageTechnology1.png");
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%;
+    -moz-background-size: 100% 100%; */
+
+    background-size: cover;
+}
+
+.main_left {
+    margin-right: 540px;
+    height: 100%;
+    /* background-color: blue; */
+}
+
+
+
+.main_right {
+    float: right;
+    width: 540px;
+    height: 100%;
+    background-image: url("../../assets/user_homepage_rightbackground1.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    color: #00f0ff;
+    font-size: 12px;
+}
+
+/* 表格部分开始 */
+.tn_table {
+    width: 460px;
+    margin: 40px auto 20px auto;
+    /* border: 1px solid #fff; */
+    height: 220px;
+    /* overflow-y: scroll; */
+}
+
+.mytbody tr:nth-child(2n) {
+    background-color: rgba(7, 92, 156, 0.25);
+    /* height: 100px; */
+    /* overflow-y: scroll; */
+}
+
+
+
+
+
+/*滚动条样式*/
+.tn_table tbody::-webkit-scrollbar {
+    width: 4px;
+    /*height: 4px;*/
+}
+
+.tn_table tbody::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    /* -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); */
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.tn_table tbody::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); */
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+
+}
+
+.tn_table tbody {
+    /* border: 1px solid #fff; */
+    height: 20px;
+    overflow-y: scroll;
+}
+
+
+
+
+
+
+
+
+.leading-out {
+    width: 80px;
+    height: 28x;
+    border: none;
+    display: block;
+    background: #ffa73c;
+    color: #fff;
+    line-height: 28px;
+    border-radius: 3px;
+    float: right;
+    margin-right: 15%;
+}
+
+/* day 表格 */
+.tn_table table {
+    width: 100%;
+    /* margin: 20px 15%; */
+    margin: 0 auto;
+}
+
+.tn_table table th {
+    background: rgba(0, 156, 255, 0.45);
+    text-align: center;
+    padding: 4px 0px;
+    /* -webkit-box-sizing: border-box; */
+    /* -moz-box-sizing: border-box; */
+    /* box-sizing: border-box; */
+    width: 25%;
+    font-size: 16px;
+    color: #00f0ff;
+}
+
+.tn_table table thead tr:nth-child(1) {
+    font-size: 14px;
+    color: #ccc;
+    font-weight: normal;
+}
+
+.tn_table td {
+    background: rgba(7, 90, 154, 0.45);
+    /* background: transparent; */
+    text-align: center;
+    padding: 6px 0px;
+    width: 25%;
+    font-size: 14px;
+    color: #00f0ff;
+    font-weight: normal;
+}
+
+.tn_table {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* 表格部分结束 */
+
+/* 右侧饼图样式 */
+
+
+.pie_charts {
+    width: 100%;
+    height: 300px;
+}
+
+/* 右侧饼图样式结束 */
+
+/* 右下方数据 */
+
+.daydata_wrap,
+.compare_wrap {
+    width: 460px;
+    margin: 0 auto;
+    height: 20%;
+    border-top: 2px solid #374a79;
+    /* padding-top: 10%; */
+}
+
+.daydata_wrap .top_content {
+    width: 100%;
+    height: 10%;
+}
+
+.compare_wrap .top_content {
+    width: 100%;
+    height: 10%;
+
+}
+
+.daydata_wrap {
+    margin-top: -40px;
+}
+
+
+.daydata_wrap .data_text {
+    width: 200px;
+    height: 40px;
+    background-color: rgba(7, 89, 151, 0.45);
+    /* opacity: 0.2; */
+    margin: 20px 10px 0 10px;
+    float: left;
+    line-height: 40px;
+    padding-left: 10px;
+}
+
+/* .daydata_wrap .data_text p {
+    opacity: 1;
+ 
+}
+
+*/
+
+.compare_wrap .head {
+    height: 40px;
+}
+
+.compare_wrap .head .data_title {
+    background-color: rgba(10, 80, 133, 0.6);
+    width: 70px;
+    height: 40px;
+    padding-left: 10px;
+    line-height: 40px;
+    float: left;
+    margin-left: 4px;
+
+}
+
+
+
+.compare_wrap .head .data_tab {
+    float: right;
+}
+
+.compare_wrap .head {
+    margin: 20px 0 10px 0;
+    height: 40px;
+}
+
+
+.compare_wrap .data_text {
+    background-color: rgba(10, 80, 133, 0.6);
+    width: 440px;
+    margin: 20px auto 0 auto;
+    height: 40px;
+    padding-left: 10px;
+    line-height: 40px;
+}
+
+.main_right_top {
+    height: 44%;
+    /* margin-top: -40px; */
+}
+
+.daydata_wrap,
+.compare_wrap {
+    height: 28%;
+}
+
+
+/* 右下方数据结束 */
+
+
+/* 左边部分开始 */
+.echarts_wrap_top {
+    /* padding-top: 50%; */
+    width: 100%;
+    height: 44%;
+    /* margin: auto 0; */
+    background-image: url("../../assets/user_homepage_leftbackground1.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    box-sizing: border-box;
+    /* margin-bottom: -30px; */
+}
+
+/* 中间中下两个echarts外框 */
+.echarts_wrap {
+    width: 100%;
+    height: 28%;
+    /* margin: auto 0; */
+    background-image: url("../../assets/user_homepage_leftMiddlebackground1.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    box-sizing: border-box;
+}
+
+/* echarts图样式 */
+.my-charts {
+    width: 96%;
+    height: 90%;
+}
+
+/* 能流图框内样式  */
+.top_content {
+    width: 100%;
+    height: 24%;
+}
+
+
+
+/* 左侧头部功能几个功能选项 */
+.echarts_wrap_top .top_content .top_nav {
+    padding-top: 40px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 40px;
+    color: #9cdeee;
+
+}
+
+.echarts_wrap_top .top_content .top_nav p {
+    float: right;
+    display: block;
+    width: 100px;
+    height: 30px;
+    color: #9cdeee;
+    background-color: transparent;
+    line-height: 30px;
+    /* background-color: brown; */
+    text-align: center;
+    /* opacity: 0.1; */
+    border: 0px;
+    background-image: url("../../assets/button_border.png");
+    background-size: 100% 100%;
+    /* background-size: cover; */
+    /* background-size: 100% 100%; */
+    /* background-size: cover; */
+}
+
+.echarts_wrap_top .top_content .energyTypeSecelt option {
+    /* appearance: none; */
+    height: 40px;
+    line-height: 40px;
+    background-color: transparent;
+    display: block;
+    padding: 20px auto;
+    color: #000;
+}
+
+.date_tab li {}
+
+
+
+.echarts_wrap_top .top_content .top_nav select {
+    padding-left: 20px;
+    float: right;
+    text-align: center;
+    margin: 0 10px 0 10px;
+    height: 30px;
+    line-height: 30px;
+    width: 100px;
+    display: block;
+    color: #9cdeee;
+    background-color: transparent;
+    border: 0px;
+    background-image: url("../../assets/button_border.png");
+    background-size: 100% 100%;
+
+}
+
+/* .echarts_wrap_top .top_content .top_nav .date_tab { */
+.date_tab {
+    float: right;
+    margin-right: 60px;
+    z-index: 999;
+}
+
+.date_tab li {
+    width: 40px;
+    height: 30px;
+    float: right;
+    line-height: 30px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    color: #9cdeee;
+    background-color: transparent;
+    border: 0px;
+    background-image: url("../../assets/homePageDateTab.png");
+    background-size: 100% 100%;
+    margin: 0 2px;
+}
+
+
+.date_tab .current {
+    /* padding: 4px; */
+    color: #0c0a44;
+    padding: 5px;
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+
+    border-radius: 4px;
+    background-color: #00f0ffab;
+    font-weight: bold;
+}
+
+.echarts_wrap .nav {
+    height: 30px;
+    width: 100%;
+    /* margin-top: -30px; */
+}
+
+
+.echarts_wrap_bottom {
+    /* margin-top: -30px; */
+    padding-top: 30px;
+
+}
+
+.echarts_wrap_middle {
+    padding-top: 40px;
+}
+
+.echarts_wrap .date_tab {
+    /* margin-top: 20px; */
+}
+
+.my_flowecharts {
+    /* margin-bottom: 40px; */
+    width: 96%;
+    height: 70%;
+}
