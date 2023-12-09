@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "scp -r ./dist/* root@139.198.152.63:/data/project/react-ruby/front/",
+    "deployb": "scp -r ../backend-rails/* root@139.198.152.63:/data/project/react-ruby/back/"
   },
   "dependencies": {
     "actioncable": "^5.2.8-1",
