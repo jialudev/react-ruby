@@ -1169,8 +1169,8 @@ export const option_pie = {
             name: '5月'
         }
         ],
-        itemStyle: {
-            emphasis: {
+        emphasis: {
+            itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
