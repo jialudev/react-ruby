@@ -558,7 +558,13 @@ const data = {
 
 export const option_flow = {
     title: {
-        text: 'Sankey Diagram'
+        text: 'Sankey Diagram',
+
+        textStyle: {
+            color: '#00e74d'
+        },
+        left: '4%',
+        // top: '-4%',
     },
     tooltip: {
         trigger: 'item',
@@ -622,483 +628,449 @@ export const option_flow = {
 }
 
 
-
-export const option_day = {
-    title: {
-        textStyle: {
-            color: '#00e74d'
+// 中间这个应该要链接socket
+export const option_day = (data) => {
+    const [data1 = [], data2 = [0]] = data || []
+    return {
+        title: {
+            textStyle: {
+                color: '#00e74d'
+            },
+            text: "日负荷曲线",
+            left: '4%',
+            // top: "%",
         },
-        text: "日负荷曲线",
-        left: '4%',
-        // top: "%",
-    },
-    grid: {
-        x: "10%",
-        y: "34%",
-        x2: "6%",
-        y2: "23%",
-    },
+        grid: {
+            x: "10%",
+            y: "34%",
+            x2: "6%",
+            y2: "23%",
+        },
 
-    //提示框组件
-    tooltip: {
-        show: true,
-        // alwaysShowContent:true,
-        triggerOn: 'mousemove',
-        // position: ['50%', '50%'],
-        trigger: 'axis',
-        axisPointer: {
-            // type: 'line',
-            // snap:true,
-            label: {
-                backgroundColor: '#6a7985'
-            }
-        }
-    },
-    toolbox: {
-        right: "14%",
-        y: '1%',
-        show: true,
-        iconStyle: {
-            normal: {
-                borderColor: '#00f0ff', //设置颜色
+        //提示框组件
+        tooltip: {
+            show: true,
+            // alwaysShowContent:true,
+            triggerOn: 'mousemove',
+            // position: ['50%', '50%'],
+            trigger: 'axis',
+            axisPointer: {
+                // type: 'line',
+                // snap:true,
+                label: {
+                    backgroundColor: '#6a7985'
+                }
             }
         },
-        feature: {
-            dataZoom: {
-                yAxisIndex: "none"
+        toolbox: {
+            right: "14%",
+            y: '1%',
+            show: false,
+            iconStyle: {
+                normal: {
+                    borderColor: '#00f0ff', //设置颜色
+                }
             },
-            dataView: {
-                readOnly: false
+            feature: {
+                dataZoom: {
+                    yAxisIndex: "none"
+                },
+                dataView: {
+                    readOnly: false
+                },
+                magicType: {
+                    type: ["line", "bar"]
+                },
+                restore: {},
+                saveAsImage: {},
             },
-            magicType: {
-                type: ["line", "bar"]
-            },
-            restore: {},
-            saveAsImage: {},
-        },
 
-    },
-    //图例
-    legend: {
-        textStyle: {
-            color: '#00f0ff',
         },
-        y: '2%',
-        data: ['昨日', '今日']
-    },
-    //横轴
-    xAxis: {
-        data: (function () {
-            var arr = [];
-            for (var i = 0; i < 24; i++) {
-                for (var j = 0; j < 6; j++) {
-                    for (var k = 0; k < 10; k++) {
-                        var mytime = i + ":" + j + k;
-                        // console.log(mytime)
-                        // console.log(typeof mytime);
-                        arr.push(mytime);
+        //图例
+        legend: {
+            textStyle: {
+                color: '#00f0ff',
+            },
+            y: '2%',
+            data: ['昨日', '今日']
+        },
+        //横轴
+        xAxis: {
+            data: (function () {
+                var arr = [];
+                for (var i = 0; i < 24; i++) {
+                    for (var j = 0; j < 6; j++) {
+                        for (var k = 0; k < 10; k++) {
+                            var mytime = i + ":" + j + k;
+                            // console.log(mytime)
+                            // console.log(typeof mytime);
+                            arr.push(mytime);
+                        }
                     }
                 }
-            }
-            // console.log(arr);
-            return arr;
-        })(),
-        axisLabel: {
-            show: true,
-            textStyle: {
-                color: '#00f0ff'
-            }
-        },
-
-        axisLine: {
-            lineStyle: {
-                type: 'solid',
-                color: '#00f0ff', //左边线的颜色
-                width: '2' //坐标线的宽度
-            }
-        },
-    },
-    //纵轴
-    yAxis: {
-
-        // min: function (value) {
-        //     return value.min - 200;
-        // },
-        splitLine: {
-            show: false
-        },
-        name: "单位：(kW)",
-        min: 0,
-        boundaryGap: ['4%', '10%'],
-        scale: true,
-        axisLabel: {
-            show: true,
-            textStyle: {
-                color: '#00f0ff'
-            }
-        },
-
-        axisLine: {
-            lineStyle: {
-                type: 'solid',
-                color: '#00f0ff', //左边线的颜色
-                width: '2' //坐标线的宽度
-            }
-        },
-    },
-    //系列列表。每个系列通过type决定自己的图表类型
-    series: [{
-        name: "昨日",
-        //折线图
-        type: "line",
-        smooth: true,
-        data: [],
-        itemStyle: { //改变折线线条颜色
-            normal: {
-                // color: "#2ec7c9",
-                // color: pie_color[2],
-                color: "#fbb03b",
-
-                lineStyle: {
-                    // color: "#2ec7c9"
-                    // color: pie_color[2],
-                    color: "#fbb03b"
-
+                // console.log(arr);
+                return arr;
+            })(),
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#00f0ff'
                 }
-            }
-        },
-        markPoint: {
-            data: [{
-                type: "max",
-                name: "最大值"
             },
-            {
-                type: "min",
-                name: "最小值"
-            }
-            ]
-        },
-        markLine: {
-            data: [{
-                type: "average",
-                name: "平均值"
-            }]
-        }
-    },
-    {
-        name: "今日",
-        //折线图
-        type: "line",
-        smooth: true,
-        data: [0],
-        itemStyle: { //改变折线线条颜色
-            normal: {
-                // color: "#b6a2de",
-                color: "#29aae1",
+
+            axisLine: {
                 lineStyle: {
+                    type: 'solid',
+                    color: '#00f0ff', //左边线的颜色
+                    width: '2' //坐标线的宽度
+                }
+            },
+        },
+        //纵轴
+        yAxis: {
+
+            // min: function (value) {
+            //     return value.min - 200;
+            // },
+            splitLine: {
+                show: false
+            },
+            name: "单位：(kW)",
+            min: 0,
+            boundaryGap: ['4%', '10%'],
+            scale: true,
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#00f0ff'
+                }
+            },
+
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#00f0ff', //左边线的颜色
+                    width: '2' //坐标线的宽度
+                }
+            },
+        },
+        //系列列表。每个系列通过type决定自己的图表类型
+        series: [{
+            name: "昨日",
+            //折线图
+            type: "line",
+            smooth: true,
+            data: data1,
+            itemStyle: { //改变折线线条颜色
+                normal: {
+                    // color: "#2ec7c9",
+                    // color: pie_color[2],
+                    color: "#fbb03b",
+
+                    lineStyle: {
+                        // color: "#2ec7c9"
+                        // color: pie_color[2],
+                        color: "#fbb03b"
+
+                    }
+                }
+            },
+            markPoint: {
+                data: [{
+                    type: "max",
+                    name: "最大值"
+                },
+                {
+                    type: "min",
+                    name: "最小值"
+                }
+                ]
+            },
+            markLine: {
+                data: [{
+                    type: "average",
+                    name: "平均值"
+                }]
+            }
+        },
+        {
+            name: "今日",
+            //折线图
+            type: "line",
+            smooth: true,
+            data: data2,
+            itemStyle: { //改变折线线条颜色
+                normal: {
                     // color: "#b6a2de",
                     color: "#29aae1",
+                    lineStyle: {
+                        // color: "#b6a2de",
+                        color: "#29aae1",
+                    }
                 }
-            }
-        },
-        markPoint: {
-            data: [{
-                type: "max",
-                name: "最大值"
             },
-            {
-                type: "min",
-                name: "最小值"
+            markPoint: {
+                data: [{
+                    type: "max",
+                    name: "最大值"
+                },
+                {
+                    type: "min",
+                    name: "最小值"
+                }
+                ]
+            },
+            markLine: {
+                data: [{
+                    type: "average",
+                    name: "平均值"
+                }]
             }
-            ]
-        },
-        markLine: {
-            data: [{
-                type: "average",
-                name: "平均值"
-            }]
         }
+        ]
     }
-    ]
-};
+}
 
 
 //上月本月
-export const option_compare = {
-    title: {
-        text: '用量对比图',
-        left: '4%',
-        // top: "-2.5%",
-        // y: '1%',
-        textStyle: {
-            color: '#00e74d'
+export const option_compare = (opts) => {
+    const [data1 = [0], data2 = [], data3 = [], data4 = []] = opts || []
+    return {
+        title: {
+            text: '用量对比图',
+            left: '4%',
+            // top: "-2.5%",
+            // y: '1%',
+            textStyle: {
+                color: '#00e74d'
+            },
         },
-    },
-    grid: {
-        x: "10%",
-        y: "30%",
-        x2: "6%",
-        y2: "28%",
-    },
-    // tooltip: {
-    //     trigger: 'axis'
-    // },
-    //提示框组件
-    tooltip: {
-        confine: true,
-        // position: [0, '50%'],
-        show: true,
-        // alwaysShowContent:true,
-        triggerOn: 'mousemove',
-
-        // position: ['50%', '50%'],
-        trigger: 'axis',
-        axisPointer: {
-            // type: 'line',
-            // snap:true,
-            label: {
-                backgroundColor: '#6a7985'
-            }
+        grid: {
+            x: "10%",
+            y: "30%",
+            x2: "6%",
+            y2: "28%",
         },
-        // 自定义提示框
-        formatter: function (values) {
+        // tooltip: {
+        //     trigger: 'axis'
+        // },
+        //提示框组件
+        tooltip: {
+            confine: true,
+            // position: [0, '50%'],
+            show: true,
+            // alwaysShowContent:true,
+            triggerOn: 'mousemove',
 
-            var res = '';
-            if (values[0]) {
-                res += values[0].name + '<br>';
-            } else {
-                res += values.name + '<br>';
-            }
-            var val = 0;
-            for (var j = 1, length = values.length; j < length; j++) {
-                if (values[j].data && (values[j].data !== "-")) {
-                    val += values[j].data;
+            // position: ['50%', '50%'],
+            trigger: 'axis',
+            axisPointer: {
+                // type: 'line',
+                // snap:true,
+                label: {
+                    backgroundColor: '#6a7985'
                 }
-            }
-            if (!val) {
-                val = "-"
-            }
-            for (var i = 0, length = values.length; i < length; i++) {
-                // 峰谷平是比值
-                if (i == 1 || i == 2 || i == 3) {
-                    if (values[i].value && val && (values[i].value !== "-")) {
-                        values[i].value = ((values[i].value / val) * 100).toFixed(1) + "%";
+            },
+            // 自定义提示框
+            formatter: function (values) {
+
+                var res = '';
+                if (values[0]) {
+                    res += values[0].name + '<br>';
+                } else {
+                    res += values.name + '<br>';
+                }
+                var val = 0;
+                for (var j = 1, length = values.length; j < length; j++) {
+                    if (values[j].data && (values[j].data !== "-")) {
+                        val += values[j].data;
                     }
                 }
-                if (i == 0) {
-                    res = res + "&nbsp;&nbsp;&nbsp;&nbsp;" + values[2].seriesName.substring(0, 7) + "总：" + val;
+                if (!val) {
+                    val = "-"
                 }
+                for (var i = 0, tlength = values.tlength; i < tlength; i++) {
+                    // 峰谷平是比值
+                    if (i == 1 || i == 2 || i == 3) {
+                        if (values[i].value && val && (values[i].value !== "-")) {
+                            values[i].value = ((values[i].value / val) * 100).toFixed(1) + "%";
+                        }
+                    }
+                    if (i == 0) {
+                        res = res + "&nbsp;&nbsp;&nbsp;&nbsp;" + values[2].seriesName.substring(0, 7) + "总：" + val;
+                    }
 
-                res += '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;background-color:' + values[i].color + '"></span>' + values[i].seriesName + ':' + values[i].value + '<br>';
-            }
-            // res = res + '总量：' + val;
+                    res += '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;background-color:' + values[i].color + '"></span>' + values[i].seriesName + ':' + values[i].value + '<br>';
+                }
+                // res = res + '总量：' + val;
 
-            return res;
-        }
-    },
-    legend: {
-        textStyle: {
-            color: '#00f0ff',
-        },
-        y: '1%',
-        right: "43%",
-        data: ['2019-04', '2019-05峰时', '2019-05平时', '2019-05谷时']
-    },
-    toolbox: {
-        iconStyle: {
-            normal: {
-                borderColor: '#00f0ff', //设置颜色
+                return res;
             }
         },
-        right: "14%",
-        y: '1%',
-        show: true,
-        feature: {
-            dataZoom: {
-                yAxisIndex: "none"
-            },
-            dataView: {
-                readOnly: false
-            },
-            magicType: {
-                type: ["line", "bar"]
-            },
-            restore: {},
-            saveAsImage: {},
-        },
-
-    },
-    calculable: true,
-    xAxis: [{
-        type: 'category',
-        data: (function () { //时间
-            var res = [];
-            var len = 1;
-            while (len < 32) {
-                res.push(len);
-                len++;
-            }
-            return res;
-        })(),
-        axisLabel: {
-            show: true,
+        legend: {
             textStyle: {
-                color: '#00f0ff'
-            }
+                color: '#00f0ff',
+            },
+            y: '1%',
+            // right: "43%",
+            data: ['2019-04', '2023-12峰时', '2023-12平时', '2023-12谷时']
         },
-        axisLine: {
-            lineStyle: {
-                type: 'solid',
-                color: '#00f0ff', //左边线的颜色
-                width: '2' //坐标线的宽度
-            }
-        },
-    }],
-    yAxis: [{
-        min: 0,
-        boundaryGap: ['10%', '10%'],
-        splitLine: {
-            show: false
-        },
-        type: 'value',
-        name: "单位：(kWh)",
-        scale: true,
-        axisLabel: {
-            show: true,
-            textStyle: {
-                color: '#00f0ff'
-            }
-        },
+        toolbox: {
+            iconStyle: {
+                normal: {
+                    borderColor: '#00f0ff', //设置颜色
+                }
+            },
+            right: "14%",
+            y: '1%',
+            show: false,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: "none"
+                },
+                dataView: {
+                    readOnly: false
+                },
+                magicType: {
+                    type: ["line", "bar"]
+                },
+                restore: {},
+                saveAsImage: {},
+            },
 
-        axisLine: {
-            lineStyle: {
-                type: 'solid',
-                color: '#00f0ff', //左边线的颜色
-                width: '2' //坐标线的宽度
-            }
         },
-    }],
-    series: [{
-        barMaxWidth: 30,
-        name: '2019-04',
-        type: 'bar',
-        data: [0],
-        itemStyle: { //改变折线线条颜色
-            normal: {
-                // color: "#2ec7c9",
-                color: "#29aae1",
+        calculable: true,
+        xAxis: [{
+            type: 'category',
+            data: (function () { //时间
+                var res = [];
+                var len = 1;
+                while (len < 32) {
+                    res.push(len);
+                    len++;
+                }
+                return res;
+            })(),
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#00f0ff'
+                }
+            },
+            axisLine: {
                 lineStyle: {
-                    // color: "#2ec7c9"
+                    type: 'solid',
+                    color: '#00f0ff', //左边线的颜色
+                    width: '2' //坐标线的宽度
+                }
+            },
+        }],
+        yAxis: [{
+            min: 0,
+            boundaryGap: ['10%', '10%'],
+            splitLine: {
+                show: false
+            },
+            type: 'value',
+            name: "单位：(kWh)",
+            scale: true,
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#00f0ff'
+                }
+            },
+
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#00f0ff', //左边线的颜色
+                    width: '2' //坐标线的宽度
+                }
+            },
+        }],
+        series: [{
+            barMaxWidth: 30,
+            name: '2023-21',
+            type: 'bar',
+            data: data1,
+            itemStyle: { //改变折线线条颜色
+                normal: {
+                    // color: "#2ec7c9",
                     color: "#29aae1",
+                    lineStyle: {
+                        // color: "#2ec7c9"
+                        color: "#29aae1",
+                    }
                 }
-            }
-        },
-        markPoint: {
-            data: [{
-                type: 'max',
-                name: '最大值'
             },
-            {
-                type: 'min',
-                name: '最小值'
-            }
-            ]
-        },
-        // markLine: {
-        //     data: [{
-        //         type: 'average',
-        //         name: '平均值'
-        //     }]
-        // }
-    },
-    {
-        barMaxWidth: 30,
-        name: '2019-05峰时',
-        type: 'bar',
-        stack: "总量",
-        data: [],
-        itemStyle: { //改变折线线条颜色
-            normal: {
-                // color: "#516bf0",
-                // color: "rgba(243,151,0,1)",
-                color: "rgba(227,112,57,1)",
-                lineStyle: {
-                    // color: "#516bf0",
-                    color: "rgba(227,112,57,1)",
-
+            markPoint: {
+                data: [{
+                    type: 'max',
+                    name: '最大值'
+                },
+                {
+                    type: 'min',
+                    name: '最小值'
                 }
-            }
+                ]
+            },
         },
+        {
+            barMaxWidth: 30,
+            name: '2023-12峰时',
+            type: 'bar',
+            stack: "总量",
+            data: data2,
+            itemStyle: { //改变折线线条颜色
+                normal: {
+                    // color: "#516bf0",
+                    // color: "rgba(243,151,0,1)",
+                    color: "rgba(227,112,57,1)",
+                    lineStyle: {
+                        // color: "#516bf0",
+                        color: "rgba(227,112,57,1)",
+
+                    }
+                }
+            },
 
 
-    }, {
-        barMaxWidth: 30,
-        name: '2019-05平时',
-        type: 'bar',
-        stack: "总量",
-        data: [],
-        itemStyle: { //改变折线线条颜色
-            normal: {
-                // color: pie_color[6],
-                color: "rgba(236,220,0,1)",
-                lineStyle: {
+        }, {
+            barMaxWidth: 30,
+            name: '2023-12平时',
+            type: 'bar',
+            stack: "总量",
+            data: data3,
+            itemStyle: { //改变折线线条颜色
+                normal: {
                     // color: pie_color[6],
                     color: "rgba(236,220,0,1)",
+                    lineStyle: {
+                        // color: pie_color[6],
+                        color: "rgba(236,220,0,1)",
+                    }
                 }
             }
-        }
 
-    }, {
-        barMaxWidth: 30,
-        name: '2019-05谷时',
-        type: 'bar',
-        stack: "总量",
-        data: [],
-        itemStyle: { //改变折线线条颜色
-            normal: {
-                // color: pie_color[5],
-                // color: '#b6a2de',
-                color: "rgba(136,193,34,1)",
-                lineStyle: {
-                    // color: pie_color[5],
-                    // color: '#b6a2de',
+        }, {
+            barMaxWidth: 30,
+            name: '2023-12谷时',
+            type: 'bar',
+            stack: "总量",
+            data: data4,
+            itemStyle: { //改变折线线条颜色
+                normal: {
                     color: "rgba(136,193,34,1)",
+                    lineStyle: {
+                        color: "rgba(136,193,34,1)",
+                    }
                 }
             }
-        }
-    },
-        // {
-        //     barMaxWidth: 0,
-        //     name: '2019-05总',
-        //     type: 'bar',
-        //     barGap: '-100%',
-        //     stack: "需量",
-        //     data: [1],
-
-        //     itemStyle: { //改变折线线条颜色
-        //         normal: {
-        //             color: pie_color[5],
-        //             // color: "rgba(0,0,0,0)",
-        //             lineStyle: {
-        //                 color: pie_color[5],
-        //                 // color: "rgba(0,0,0,0)",
-        //             }
-        //         }
-        //     },
-        //     markPoint: {
-        //         data: [{
-        //             type: 'max',
-        //             name: '最大值'
-        //         },
-        //         {
-        //             type: 'min',
-        //             name: '最小值'
-        //         }
-        //         ]
-        //     }
-        // }
-    ]
-};
+        },
+        ]
+    }
+}
 
 const pie_color = [
     "#07dbff",
@@ -1117,9 +1089,8 @@ const pie_color = [
 
 export const option_pie = {
     title: {
-        text: '月综合能耗占比',
+        text: '月消耗占比',
 
-        // y: "40px",
         top: "6px",
         // x: 'center',
         left: 'center',
@@ -1131,10 +1102,6 @@ export const option_pie = {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
-    // 赵总定颜色
-    // color: ['#ecbccc', '#005bac', '#e6e6b0', '#7fc8dc', '#fff'],
-    // 饼图颜色
-    // color: ['#f3b26e', '#07dbff', '#efe96f', '#5db25d', '#dbf4f9', '#f3954d', '#93ddc4', '#ffc485', '#bbd165', '#696491', '#8be87e', '#fd90b0'],
     color: pie_color,
     legend: {
         orient: 'vertical',
@@ -1143,20 +1110,16 @@ export const option_pie = {
         textStyle: {
             color: '#00f0ff'
         },
-        data: ['模拟A', '模拟B', '模拟C', '模拟D', '模拟E']
+        data: ['1月', '2月', '3月', '4月', '5月']
     },
     series: [{
-        name: '综合能耗折标煤占比（单位:吨标煤）',
+        name: '综合能耗',
         type: 'pie',
         radius: '50%',
         center: ['50%', '56%'],
         label: {
             normal: {
                 formatter: '{d}%',
-                // backgroundColor: '#eee',
-                // borderColor: '#aaa',
-                // borderWidth: 1,
-                // borderRadius: 4,
                 rich: {
                     a: {
                         color: '#999',
@@ -1186,24 +1149,24 @@ export const option_pie = {
 
 
         data: [{
-            value: 0,
-            name: '模拟A'
+            value: 10,
+            name: '1月'
         },
         {
-            value: 0,
-            name: '模拟B'
+            value: 20,
+            name: '2月'
         },
         {
-            value: 0,
-            name: '模拟C'
+            value: 30,
+            name: '3月'
         },
         {
-            value: 0,
-            name: '模拟D'
+            value: 50,
+            name: '4月'
         },
         {
-            value: 0,
-            name: '模拟E'
+            value: 20,
+            name: '5月'
         }
         ],
         itemStyle: {

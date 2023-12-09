@@ -23,5 +23,14 @@ module BackendRails
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+
+    # Add this configuration block
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*' # 允许所有来源的跨域请求，也可以指定具体的来源
+        resource '*', headers: :any, methods: [:get]
+      end
+    end
   end
 end
