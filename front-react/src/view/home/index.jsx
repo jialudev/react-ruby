@@ -1,8 +1,10 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './index.css'
-
+import ReactEcharts from "echarts-for-react"
+// import echarts from "echarts";
+import { option_compare, option_day, option_flow, option_pie } from './getOpts'
 export default function Page() {
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
 
     return (
 
@@ -18,10 +20,7 @@ export default function Page() {
                             <thead>
                                 <tr>
                                     <th colSpan="4">用能状况</th>
-                                    <ul className="date_tab" id="energy_condition_date_tab">
-                                        <li className="year" value="Y">年</li>
-                                        <li className="month current" value="M">月</li>
-                                    </ul>
+
 
                                 </tr>
                                 <tr>
@@ -66,7 +65,9 @@ export default function Page() {
                         </table>
                     </div>
                     <div className="pie_wrap">
-                        <div className="pie_charts" id="pie_charts"></div>
+
+                        <ReactEcharts className="pie_charts" option={option_pie} />
+                        {/* <div className="pie_charts" id="pie_charts"></div> */}
                     </div>
                 </div>
                 <div className="daydata_wrap">
@@ -84,10 +85,7 @@ export default function Page() {
                     <div className="top_content"></div>
                     <div className="head">
                         <div className="data_title">用电概况</div>
-                        <ul className="date_tab" id="electricity_consumption_tab">
-                            <li className="year" value="Y">年</li>
-                            <li className="month current" value="M">月</li>
-                        </ul>
+
                     </div>
                     <div className="content active">
                         <div className="data_text" id="nowval">当日用量:&nbsp<span></span></div>
@@ -115,10 +113,10 @@ export default function Page() {
                             </p>
                         </div>
                     </div>
-                    <div className="my_flowecharts" id="flow_echarts"></div>
+                    <ReactEcharts className="my_flowecharts" option={option_flow} />
                 </div>
                 <div className="echarts_wrap echarts_wrap_middle">
-                    <div className="my-charts" id="day_echarts"></div>
+                    <ReactEcharts className="my-charts" option={option_day} />
                 </div>
                 <div className="echarts_wrap echarts_wrap_bottom">
                     <div className="nav">
@@ -128,7 +126,7 @@ export default function Page() {
                         </ul>
                     </div>
 
-                    <div className="my-charts" id="compare_echarts"></div>
+                    <ReactEcharts className="my-charts" option={option_compare} />
                 </div>
 
 

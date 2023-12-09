@@ -45,7 +45,7 @@ body {
 /* 表格部分开始 */
 .tn_table {
     width: 460px;
-    margin: 40px auto 20px auto;
+    margin: 50px auto 20px auto;
     /* border: 1px solid #fff; */
     height: 220px;
     /* overflow-y: scroll; */
@@ -164,6 +164,9 @@ body {
 
 .daydata_wrap,
 .compare_wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
     width: 460px;
     margin: 0 auto;
     height: 20%;
@@ -182,9 +185,9 @@ body {
 
 }
 
-.daydata_wrap {
+/* .daydata_wrap {
     margin-top: -40px;
-}
+} */
 
 
 .daydata_wrap .data_text {
@@ -251,6 +254,10 @@ body {
     height: 28%;
 }
 
+.compare_wrap {
+    margin-top: 20px;
+    padding-bottom: 66px;
+}
 
 /* 右下方数据结束 */
 
@@ -417,4 +424,5 @@ body {
     /* margin-bottom: 40px; */
     width: 96%;
     height: 70%;
+    top: -18px
 }
