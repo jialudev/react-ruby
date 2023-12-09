@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/api/get_data', to: 'api#get_data'
   # Defines the root path route ("/")
   # root "posts#index"
+  mount ActionCable.server => '/cable'
 end

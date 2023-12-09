@@ -7,6 +7,7 @@ import { option_compare, option_day, option_flow, option_pie } from "./getOpts";
 import { useEffect, memo } from "react";
 import { Fetch } from "../../common/utils";
 import { data_url } from "../../common/port";
+import cable from "../../common/actionCable";
 
 PageRight.propTypes = {
   tableData: PropTypes.array.isRequired,
@@ -136,6 +137,25 @@ export default function Page() {
   const [lineData, setLineData] = useState([]);
 
   const [socketData, setSocketData] = useState([]);
+
+  useEffect(() => {
+    const channel = cable.subscriptions.create("CableChannel", {
+      connected() {
+        console.log("Connected to ActionCable channel");
+      },
+      disconnected() {
+        console.log("Disconnected from ActionCable channel");
+      },
+      received(data) {
+        console.log("Received data from ActionCable:", data);
+        // setMessage(data.message);
+      },
+    });
+    // 在组件卸载时取消订阅
+    return () => {
+      channel.unsubscribe();
+    };
+  }, []); // 仅在组件挂载时运行
 
   useEffect(() => {
     if (tableData.length) {
