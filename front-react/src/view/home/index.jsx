@@ -136,18 +136,22 @@ export default function Page() {
   const [tableData, setTableData] = useState([]);
   const [lineData, setLineData] = useState([]);
 
-  const [socketData, setSocketData] = useState([]);
+  const [socketData, setSocketData] = useState([[], []]);
 
   useEffect(() => {
     const channel = cable.subscriptions.create("CableChannel", {
       connected() {
         console.log("Connected to ActionCable channel");
+        this.perform("receive", { data: socketData });
       },
       disconnected() {
         console.log("Disconnected from ActionCable channel");
       },
       received(data) {
         console.log("Received data from ActionCable:", data);
+        setSocketData((res) => {
+          res[0].push(10);
+        });
         // setMessage(data.message);
       },
     });
@@ -155,7 +159,7 @@ export default function Page() {
     return () => {
       channel.unsubscribe();
     };
-  }, []); // 仅在组件挂载时运行
+  }, [setSocketData, socketData]); // 仅在组件挂载时运行
 
   useEffect(() => {
     if (tableData.length) {
