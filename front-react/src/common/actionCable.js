@@ -2,6 +2,6 @@
 
 import ActionCable from 'actioncable';
 
-const cable = ActionCable.createConsumer('ws://127.0.0.1:3000/cable');
+const cable = ActionCable.createConsumer('ws://139.198.152.63:13000/cable');
 
 export default cable;

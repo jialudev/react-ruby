@@ -1,1 +1,3 @@
-export const data_url = '//127.0.0.1:3000/api/get_data'
+export const url = '//139.198.152.63:13000'
+
+export const data_url = url + 'api/get_data'
