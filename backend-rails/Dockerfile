@@ -1,7 +1,10 @@
 # syntax = docker/dockerfile:1
 
 # 使用 Ruby 3.2.2 镜像
-FROM registry.docker.com/library/ruby:3.2.2-slim as base
+# FROM registry.docker.com/library/ruby:3.2.2-slim as base
+
+ARG RUBY_VERSION=3.2.2
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 # 设置工作目录
 WORKDIR /rails
