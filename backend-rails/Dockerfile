@@ -21,7 +21,7 @@ RUN apt-get update -qq && \
 
 # 第二个阶段：最终镜像
 ARG RUBY_VERSION=3.2.2
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM registry.docker.com/library/ruby:${RUBY_VERSION}-slim as base
 
 # 设置工作目录
 WORKDIR /rails
