@@ -14,7 +14,7 @@ PageRight.propTypes = {
 };
 
 function PageRight({ tableData }) {
-  console.log("PageRight render===");
+  console.log("PageRight render===", tableData);
   return (
     <div className="main_right">
       <div className="main_right_top">
@@ -127,44 +127,44 @@ function PageRight({ tableData }) {
   );
 }
 const MemoizedPageRight = memo(PageRight, (pros, newProp) => {
-  if (newProp.tableData.length) {
-    return true;
-  }
-  return false;
+  return newProp.tableData.length == pros.tableData.length;
 });
 export default function Page() {
   const [tableData, setTableData] = useState([]);
   const [lineData, setLineData] = useState([]);
-
-  const [socketData, setSocketData] = useState([[10], []]);
+  const data = Array.from({ length: 500 }, (r, i) => i + 9);
+  const list = [];
+  list[0] = [...data];
+  list[1] = JSON.parse(JSON.stringify(data.reverse()));
+  const [socketData, setSocketData] = useState(list);
 
   useEffect(() => {
-    const channel = cable.subscriptions.create("CableChannel", {
-      connected() {
-        console.log("Connected to ActionCable channel");
-        // setTimeout(() => {
-        //   this.perform("receive", { data: socketData });
-        //   console.log("发送 receive", socketData);
-        // }, 1000);
-      },
-      disconnected() {
-        console.log("Disconnected from ActionCable channel");
-      },
-      received(res) {
-        console.log("Received data from ActionCable:", res);
-        const { data } = res;
-        setSocketData((list) => {
-          list[0] = [...data];
-          list[1] = JSON.parse(JSON.stringify(data.reverse()));
-          return JSON.parse(JSON.stringify(list));
-        });
-        // setMessage(data.message);
-      },
-    });
-    // 在组件卸载时取消订阅
-    return () => {
-      channel.unsubscribe();
-    };
+    // const channel = cable.subscriptions.create("CableChannel", {
+    //   connected() {
+    //     console.log("Connected to ActionCable channel");
+    //     // setTimeout(() => {
+    //     //   this.perform("receive", { data: socketData });
+    //     //   console.log("发送 receive", socketData);
+    //     // }, 1000);
+    //   },
+    //   disconnected() {
+    //     console.log("Disconnected from ActionCable channel");
+    //   },
+    //   received(res) {
+    //     console.log("Received data from ActionCable:", res);
+    //     const { data } = res;
+    //     setSocketData((list) => {
+    //       list[0] = [...data];
+    //       list[1] = JSON.parse(JSON.stringify(data.reverse()));
+    //       return JSON.parse(JSON.stringify(list));
+    //     });
+    //     // setMessage(data.message);
+    //   },
+    // });
+    // // 在组件卸载时取消订阅
+    // return () => {
+    //   channel.unsubscribe();
+    // };
   }, [setSocketData]); // 仅在组件挂载时运行
 
   useEffect(() => {
@@ -172,8 +172,8 @@ export default function Page() {
       return;
     }
     Fetch({ url: data_url }).then(({ result }) => {
-      const { tableData, lineData } = result;
-      setTableData(tableData);
+      const { tableData: resData, lineData } = result;
+      setTableData(resData);
       setLineData(lineData);
     });
   }, [tableData]);
